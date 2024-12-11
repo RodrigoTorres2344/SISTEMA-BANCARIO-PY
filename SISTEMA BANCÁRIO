@@ -1,0 +1,86 @@
+print('\n =============SEJA BEM VINDO AO BANCO DO BRASIL!==================')
+
+cpf = input('Digite o seu CPF: ')
+
+conta_sem_digito = float(input('Digite sua conta'))
+
+agencia = float(input('Digite sua agencia'))
+
+print('Seja Bem vindo!')
+
+
+
+menu = """"
+
+[d] deposito
+[s] saque
+[e] extrato 
+[q] sair
+
+"""
+
+Saldo = 0 
+limite = 500
+limite_saques = 3
+numero_saques = 0
+extrato = ""
+
+while True: 
+
+    opcao = input(menu)
+
+    if opcao == 'd':
+        valor = float(input('Insira um valor para depósito: '))
+
+        if valor > 0:
+            Saldo += valor
+            extrato += "Depósito: R$ {:.2f}\n".format(valor)
+
+            print('Deposito efetuado com sucesso!')
+
+        else:
+            print('Não foi possível realizar a operação')
+
+        
+    elif opcao == 's':
+        valor = float(input('Insira um valor para sacar: '))
+
+        SALDO_INDISPONÍVEL = valor > Saldo
+
+        SALDO_DISPONÍVEL = Saldo >= valor
+
+        LIMITE_ULTRAPASSADO_DE_SAQUES = numero_saques > limite_saques
+        
+        if SALDO_INDISPONÍVEL:
+            print('Não foi possível realizar a operação, tente novamente.')
+
+        elif SALDO_DISPONÍVEL:
+            print('Operação realizada com sucesso! Sacando...')
+
+        elif LIMITE_ULTRAPASSADO_DE_SAQUES:
+            print('Limite de saques excedido!')
+
+        elif valor > 0:
+            Saldo -= valor
+            extrato += "Saque: R$ {:.2f}\n".format(valor)
+            numero_saques += 3
+
+        else:
+            print('A operação falhou, tente novamente')
+
+
+
+    elif opcao == 'e':
+            print('\n================EXTRATO BANCÁRIO=====================')
+            print('Não foram feitas movimentações.' if not extrato else extrato)
+            print('\nSaldo: R$ {:.2f}'.format(valor))
+            print('========================================================')
+
+    elif opcao == 'q':
+            break 
+
+    else:
+            print('Não foi possível realizar a operação, tente novamente.')
+
+            
+
